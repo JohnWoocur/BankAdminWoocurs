@@ -1,7 +1,8 @@
 #include <vector>
 #include <string>
 
-void deposit(){
+void deposit()
+{
     int cid;
     cout << "Enter Customer id : ";
     cin >> cid;

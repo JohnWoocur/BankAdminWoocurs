@@ -1,12 +1,13 @@
-
 #include <string>
 
 using namespace std;
 
-void staff () {
+void staff()
+{
     int choice;
 
-    while (true) {
+    while (true)
+    {
         cout << "<<<<<<<<<< Employee Management System >>>>>>>>>>\n\n";
         cout << "1. New Account\n";
         cout << "2. Deposit Amount\n";
@@ -20,11 +21,13 @@ void staff () {
         cout << "Enter your choice (0-8, 0 to exit): ";
         cin >> choice;
 
-        if (choice == 0) {
+        if (choice == 0)
+        {
             break;
         }
 
-        if (choice == 5) {
+        if (choice == 5)
+        {
             int employeeID;
             string name;
             string title;
@@ -50,11 +53,10 @@ void staff () {
             cout << "Do you want to continue? (y/n): ";
             cin >> continueOption;
 
-            if (continueOption != 'y' && continueOption != 'Y') {
+            if (continueOption != 'y' && continueOption != 'Y')
+            {
                 break; // Exit the loop if the user chooses not to continue
             }
         }
     }
-
-
 }
