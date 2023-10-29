@@ -1,23 +1,37 @@
 #include <iostream>
 
+using namespace std;
+
+// void  function decalrations
+
+void payroll();
+void staff();
+void customer_Account_Menu();
+void admin_Menu();
+void deposit();
+void withdraw();
+void withdraw_FH(int);
+void deposit_FH(int);
+void create_Customer_Account(int, int, string, int);
+void create_Staff_Account(int, string, string, int);
+void view_Customer_Account(int);
+void view_Staff_Account(int);
+void view_All_Customer_Account();
+void view_All_Staff_Account();
+
 // Next Header files declaration
-#include "switch.h"
 #include "staff.h"
 #include "deposit.h"
 #include "payroll.h"
 #include "login.h"
-#include "safna.h"
+#include "menu.h"
 #include "withdraw.h"
 #include "fileHandler.h"
 
-using namespace std;
-
-// function decalrations
 
 int main()
 {
-
-  account_Menu();
+  login();
 
   // statements
   // home();

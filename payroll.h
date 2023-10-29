@@ -1,8 +1,10 @@
-
+#include <iostream>
 using namespace std;
 
 void payroll()
 {
+   // nusra 
+   // add staff id input from user
    // variable to store information
    double hourlyrate = 0;
    double overtimepay = 0;
@@ -79,4 +81,8 @@ void payroll()
    netsal = grosssal - dedac;
 
    cout << "Enter the Net Salary:" << netsal << endl;
+
+   // loop to another payroll or return to previeous menu,
+   // save all data in single file for each staff id
+   // save it in payroll folder file name as staff id
 }

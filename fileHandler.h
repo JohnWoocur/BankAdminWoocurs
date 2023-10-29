@@ -3,9 +3,10 @@
 using namespace std;
 void withdraw_FH(int cid)
 {
+    // linthu
     string accNumber, id, name, Balance;
     string file = "customer/" + to_string(cid) + ".txt";
-        start:
+start:
     ifstream readFile(file);
     if (readFile.is_open())
     {
@@ -28,7 +29,7 @@ void withdraw_FH(int cid)
             cout << "Balance Amount is : " << bal << " Rs" << endl;
 
             int input;
-            endMenu:
+        endMenu:
             cout << endl;
             cout << "1) Another Withdraw ?." << endl;
             cout << "2) Go to Main Menu" << endl;
@@ -41,7 +42,7 @@ void withdraw_FH(int cid)
                 goto start;
                 break;
             case 2:
-                // customer_Menu();
+                admin_Menu();
                 break;
             default:
                 goto endMenu;
@@ -60,10 +61,15 @@ void withdraw_FH(int cid)
     }
 }
 
-void deposit(int cid, int amount)
+void deposit_FH(int cid)
 {
+    // rifky
+    int amount;
+    cout << "Enter Deposit amount : ";
+    cin >> amount;
+
     string accNumber, id, name, Balance;
-    string file = to_string(cid) + ".txt";
+    string file = "customer/" + to_string(cid) + ".txt";
     ifstream myFile(file);
     if (myFile.is_open())
     {
@@ -87,6 +93,7 @@ void deposit(int cid, int amount)
 
 void create_Customer_Account(int customer_id, int account_Number, string customer_Name, int Balance)
 {
+    // jathu get user input and fix this
 
     string file = "customer/" + to_string(customer_id) + ".txt";
     ofstream myFile(file);
@@ -104,13 +111,42 @@ void create_Customer_Account(int customer_id, int account_Number, string custome
 
 void create_Staff_Account(int staff_Id, string name, string staff_Address, int number)
 {
-    string file = to_string(staff_Id) + ".txt";
+// jd get user input and fix this
+start:
+    // inputs here
+    string file = "staff/" + to_string(staff_Id) + ".txt";
     ofstream myFile(file);
     if (myFile.is_open())
     {
         myFile << name << " " << staff_Id << " " << staff_Address << " " << number;
         cout << "Account details saved successfully" << endl;
         myFile.close();
+        // loop to view another customer or return to previeous menu
+
+        endLoop:
+        cout << "\n1) Create another staff ?." << endl;
+        cout << "2) Back" << endl;
+        cout << "3) Logout" << endl;
+        cout << "Choose Option : ";
+        int input;
+        cin >> input;
+
+        switch (input)
+        {
+        case 1:
+            goto start;
+            break;
+        case 2:
+            staff_Account_Menu();
+            break;
+        case 3:
+            login();
+            break;
+
+        default:
+            goto endLoop;
+            break;
+        }
     }
     else
     {
@@ -120,8 +156,10 @@ void create_Staff_Account(int staff_Id, string name, string staff_Address, int n
 
 void view_Customer_Account(int customer)
 {
+    // thasna get user input and fix this
+
     string accNumber, id, name, Balance;
-    string file = to_string(customer) + ".txt";
+    string file = "customer/" + to_string(customer) + ".txt";
     ifstream myFile(file);
     if (myFile.is_open())
     {
@@ -134,6 +172,8 @@ void view_Customer_Account(int customer)
             cout << "Account Balance : " << Balance << endl;
         }
         myFile.close();
+
+        // loop to view another customer or return to previeous menu
     }
     else
     {
@@ -143,8 +183,10 @@ void view_Customer_Account(int customer)
 
 void view_Staff_Account(int staff_id)
 {
+    // saheel get user input and fix this
+
     string name, id, address, number;
-    string file = to_string(staff_id) + ".txt";
+    string file = "staff/" + to_string(staff_id) + ".txt";
     ifstream myFile(file);
     if (myFile.is_open())
     {
@@ -155,6 +197,8 @@ void view_Staff_Account(int staff_id)
             cout << "Staff Address : " << address << endl;
             cout << "Staff Contact Number : " << number << endl;
         }
+        myFile.close();
+        // loop to view another staff or return to previeous menu
     }
     else
     {
@@ -164,12 +208,16 @@ void view_Staff_Account(int staff_id)
 
 void view_All_Customer_Account()
 {
-    // issue4
+    // ad, sheba customer report all customers as line by line
+    // get filenames within customer folder then read
+
     cout << "All Customer account" << endl;
+    // back to previeous menu
 }
 
 void view_All_Staff_Account()
 {
-    // issue5
+    // sheba customer report all customers as line by line
     cout << "All staff account" << endl;
+    // back to previeous menu
 }
