@@ -1,12 +1,12 @@
-#include <vector>
-#include <string>
+#include <iostream>
 
+using namespace std;
 void deposit()
 {
+    // rifky
     int cid;
     cout << "Enter Customer id : ";
     cin >> cid;
-    int amount;
-    cout << "Enter Deposit amount : ";
-    cin >> amount;
+
+    deposit_FH(cid);
 }
