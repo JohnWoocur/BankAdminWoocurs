@@ -1,10 +1,12 @@
 #include <string>
+#include <fstream>
 
 using namespace std;
 
 void staff()
 {
     int choice;
+
 
     while (true)
     {
@@ -29,8 +31,8 @@ void staff()
         if (choice == 5)
         {
             int employeeID;
-            string name;
-            string title;
+            fstream file;
+            string name,job_position,address,email_address,phone_number,dob;
 
             cout << "Please enter below details\n";
             cout << "Enter Employee ID: ";
@@ -41,13 +43,27 @@ void staff()
             cin.ignore();
             getline(cin, name);
 
-            cout << "Enter Title: ";
-            getline(cin, title);
+            cout << "Enter Job-Position: ";
+            getline(cin, job_position);
+
+            cout <<"Enter Address: ";
+            getline(cin, address);
+
+            cout <<"Enter Email-Address: ";
+            getline(cin, email_address);
+
+            cout <<"Enter Phone-Number: ";
+            getline(cin, phone_number);
+
+
 
             cout << "\nEmployee Details:" << endl;
             cout << "Employee ID: " << employeeID << endl;
             cout << "Name: " << name << endl;
-            cout << "Title: " << title << endl;
+            cout << "Job Position: " << job_position << endl;
+            cout << "Email-Address: " << email_address <<endl;
+            cout << "Phone-number: " << phone_number << endl;
+
 
             char continueOption;
             cout << "Do you want to continue? (y/n): ";
@@ -57,6 +73,12 @@ void staff()
             {
                 break; // Exit the loop if the user chooses not to continue
             }
+            else{
+                cout << "End" << endl;
+            }
+            file.open("staff_record.txt" ,ios::app | ios::out);
+            file<<"\t"  <<"\t" <<name <<"\t"<<job_position << "\t"<<email_address <<"\t"<< phone_number <<"" <<"\n";
+            file.close();
+}
         }
     }
-}

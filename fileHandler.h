@@ -109,16 +109,31 @@ void create_Customer_Account(int customer_id, int account_Number, string custome
     }
 }
 
-void create_Staff_Account(int staff_Id, string name, string staff_Address, int number)
+void create_Staff_Account(int staff_Id, string name, string staff_Address, int phone_number)
 {
 // jd get user input and fix this
 start:
-    // inputs here
-    string file = "staff/" + to_string(staff_Id) + ".txt";
+            cout << "Enter Staff ID: ";
+            cin >> staff_Id;
+
+            cout << "Enter Name: ";
+            cin.ignore();
+            getline(cin, name);
+
+            cout << "Enter Staff Address: ";
+            cin >>staff_Address;
+
+            cout << "Enter Phone Number: ";
+            cin >> phone_number;
+
+
+
+
+    string file = "staff.txt";
     ofstream myFile(file);
     if (myFile.is_open())
     {
-        myFile << name << " " << staff_Id << " " << staff_Address << " " << number;
+        myFile << name << " " << staff_Id << " " << staff_Address << " " << phone_number;
         cout << "Account details saved successfully" << endl;
         myFile.close();
         // loop to view another customer or return to previeous menu
