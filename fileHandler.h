@@ -1,30 +1,58 @@
 #include <iostream>
+#include <fstream>
 using namespace std;
-void withdraw_FH(int cid, int amount)
+void withdraw_FH(int cid)
 {
     string accNumber, id, name, Balance;
-    string file = to_string(cid) + ".txt";
-    ifstream myFile(file);
-    if (myFile.is_open())
+    string file = "customer/" + to_string(cid) + ".txt";
+        start:
+    ifstream readFile(file);
+    if (readFile.is_open())
     {
-        while (myFile >> accNumber >> id >> name >> Balance)
+        readFile >> accNumber >> id >> name >> Balance;
+        readFile.close();
+        int amount;
+        cout << "\nAccount Balance of " + name + " is : " + Balance + " Rs" << endl;
+        cout << "Enter Withdrawal amount : ";
+        cin >> amount;
+
+        int bal = stoi(Balance);
+        if (bal >= amount)
         {
-            int bal = stoi(Balance);
-            if (bal >= amount)
+            bal = bal - amount;
+            // readFile.close();
+            ofstream writeFile(file);
+            writeFile << accNumber << " " << id << " " << name << " " << bal;
+            writeFile.close();
+            cout << "\nWithdrawal success..." << endl;
+            cout << "Balance Amount is : " << bal << " Rs" << endl;
+
+            int input;
+            endMenu:
+            cout << endl;
+            cout << "1) Another Withdraw ?." << endl;
+            cout << "2) Go to Main Menu" << endl;
+            cout << "\nChoose Option : ";
+
+            cin >> input;
+            switch (input)
             {
-                bal = bal - amount;
-                myFile.close();
-                ofstream myFile(file);
-                myFile << accNumber << " " << id << " " << name << " " << bal;
-                myFile.close();
-                cout << " Withdrawal success.." << endl;
-            }
-            else
-            {
-                cout << " Withdrawal Failed... enter availabe amount.." << endl;
+            case 1:
+                goto start;
+                break;
+            case 2:
+                // customer_Menu();
+                break;
+            default:
+                goto endMenu;
+                break;
             }
         }
-        myFile.close();
+        else
+        {
+            cout << "Withdrawal Failed... enter availabe amount.." << endl;
+            goto start;
+        }
     }
     else
     {
@@ -60,7 +88,7 @@ void deposit(int cid, int amount)
 void create_Customer_Account(int customer_id, int account_Number, string customer_Name, int Balance)
 {
 
-    string file = to_string(customer_id) + ".txt";
+    string file = "customer/" + to_string(customer_id) + ".txt";
     ofstream myFile(file);
     if (myFile.is_open())
     {
