@@ -8,10 +8,10 @@ void payroll();
 void staff();
 void customer_Account_Menu();
 void admin_Menu();
-void deposit();
+//void deposit();
 void withdraw();
 void withdraw_FH(int);
-void deposit_FH(int);
+void deposit_FH();
 void create_Customer_Account(int, int, string, int);
 void create_Staff_Account(int, string, string, int);
 void view_Customer_Account(int);
@@ -21,7 +21,7 @@ void view_All_Staff_Account();
 
 // Next Header files declaration
 #include "staff.h"
-#include "deposit.h"
+//#include "deposit.h"
 #include "payroll.h"
 #include "login.h"
 #include "menu.h"

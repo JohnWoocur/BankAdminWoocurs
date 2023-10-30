@@ -61,33 +61,62 @@ start:
     }
 }
 
-void deposit_FH(int cid)
+void deposit_FH()
 {
-    // rifky
-    int amount;
-    cout << "Enter Deposit amount : ";
-    cin >> amount;
+    labelrestart:
+    int cid;
+    cout << "Enter Customer id : ";
+    cin >> cid;
+    labeldeposit:
+
 
     string accNumber, id, name, Balance;
     string file = "customer/" + to_string(cid) + ".txt";
     ifstream myFile(file);
     if (myFile.is_open())
     {
-        while (myFile >> accNumber >> id >> name >> Balance)
-        {
+        myFile >> accNumber >> id >> name >> Balance;
+        cout<<"account balance is :"<< Balance;
+        cout<<endl;
+        int amount;
+    cout << "Enter Deposit amount : ";
+    cin >> amount;
+
             int bal = stoi(Balance);
             bal = bal + amount;
             myFile.close();
-            ofstream myFile(file);
-            myFile << accNumber << " " << id << " " << name << " " << bal;
-            myFile.close();
+            ofstream myFile2(file);
+            myFile2 << accNumber << " " << id << " " << name << " " << bal;
+            myFile2.close();
             cout << " Deposit success.." << endl;
-        }
-        myFile.close();
+            cout<<"now balance is :"<< bal;
+            cout<<endl;
+         int input;
+        endMenu:
+            cout << endl;
+            cout << "1) Another Deposit ?." << endl;
+            cout << "2) Go to Main Menu" << endl;
+            cout << "\nChoose Option : ";
+
+            cin >> input;
+            switch (input)
+            {
+            case 1:
+                goto labeldeposit;
+                break;
+            case 2:
+                //admin_Menu();
+                break;
+            default:
+                goto endMenu;
+                break;
+            }
+
     }
     else
     {
-        cout << "unable to open";
+        cout << "account not found";
+        goto labelrestart;
     }
 }
 

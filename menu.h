@@ -156,7 +156,7 @@ start:
         withdraw();
         break;
     case 4:
-        deposit();
+        deposit_FH();
         break;
     case 5:
         payroll();
