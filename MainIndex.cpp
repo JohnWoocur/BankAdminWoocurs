@@ -9,8 +9,7 @@ void staff();
 void customer_Account_Menu();
 void admin_Menu();
 void deposit();
-void withdraw();
-void withdraw_FH(int);
+void withdraw_FH();
 void deposit_FH(int);
 void create_Customer_Account(int, int, string, int);
 void create_Staff_Account(int, string, string, int);
@@ -25,7 +24,6 @@ void view_All_Staff_Account();
 #include "payroll.h"
 #include "login.h"
 #include "menu.h"
-#include "withdraw.h"
 #include "fileHandler.h"
 
 
