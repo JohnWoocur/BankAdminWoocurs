@@ -8,6 +8,8 @@ void payroll();
 void staff();
 void customer_Account_Menu();
 void admin_Menu();
+void staffs();
+void deposit();
 //void deposit();
 void withdraw();
 void withdraw_FH(int);
@@ -20,6 +22,9 @@ void view_All_Customer_Account();
 void view_All_Staff_Account();
 
 // Next Header files declaration
+
+//#include "staff.h"
+#include "deposit.h"
 #include "staff.h"
 //#include "deposit.h"
 #include "payroll.h"
@@ -27,6 +32,9 @@ void view_All_Staff_Account();
 #include "menu.h"
 #include "withdraw.h"
 #include "fileHandler.h"
+#include "staffs.h"
+#include "staffadd.h"
+
 
 
 
