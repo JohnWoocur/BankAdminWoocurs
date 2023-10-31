@@ -183,30 +183,65 @@ start:
     }
 }
 
-void view_Customer_Account(int customer)
+void view_Customer_Account()
 {
-    // thasna get user input and fix this
+    start:
 
-    string accNumber, id, name, Balance;
-    string file = "customer/" + to_string(customer) + ".txt";
+    int acc,accNumber;
+    string  id, name, Balance;
+
+    cout << "\nEnter the Account ID : "<< endl;
+    cin >> acc;
+    cout << endl;
+
+    string file;
+    file = "customer/" + to_string(acc) + ".txt";
+
     ifstream myFile(file);
     if (myFile.is_open())
     {
-        while (myFile >> accNumber >> id >> name >> Balance)
-        {
-            // issue3
-            cout << "Account Number : " << accNumber << endl;
-            cout << "Name : " << name << endl;
-            cout << "Id : " << id << endl;
-            cout << "Account Balance : " << Balance << endl;
-        }
+        myFile >> accNumber >> id >> name >> Balance;
+            
+                cout << "Account Number : " << accNumber << endl;
+                cout << "Name : " << name << endl;
+                cout << "Id : " << id << endl;
+                cout << "Account Balance : " << Balance << endl;
+              
         myFile.close();
+         
+    endMenu:
+         int input;
+        
+            cout << endl;
+            cout << "1) View another customer." << endl;
+            cout << "2) Back" << endl;
+            cout << "3) Go to Main Menu" << endl;
+            cout << "\nChoose Option : ";
 
-        // loop to view another customer or return to previeous menu
+            cin >> input;
+            switch (input)
+            {
+            case 1:
+                goto start;
+                break;
+            case 2:
+                customer_Account_Menu();
+                break;
+            case 3:
+                admin_Menu();
+                break;
+            default:
+                goto endMenu;
+                break;
+
+        // loop to view another customer or return to previous menu
+
+            }
     }
     else
     {
-        cout << "unable to open " << endl;
+        cout << "The Customer File isn't Found " << endl;
+        goto start;
     }
 }
 
