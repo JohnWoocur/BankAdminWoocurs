@@ -1,9 +1,14 @@
 #include <iostream>
 #include <fstream>
 using namespace std;
-void withdraw_FH(int cid)
+void withdraw_FH()
 {
     // linthu
+restart:
+    int cid;
+    cout << "Enter Customer id : ";
+    cin >> cid;
+
     string accNumber, id, name, Balance;
     string file = "customer/" + to_string(cid) + ".txt";
 start:
@@ -57,7 +62,8 @@ start:
     }
     else
     {
-        cout << "unable to open";
+        cout << "Account Not Found !!!";
+        goto restart;
     }
 }
 
@@ -143,7 +149,7 @@ void create_Customer_Account(int customer_id, int account_Number, string custome
 
 void view_Customer_Account()
 {
-
+  
 
     start:
 
