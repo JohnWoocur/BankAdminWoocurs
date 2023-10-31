@@ -30,7 +30,8 @@ customer:
         break;
     case 2:
         // thasna
-        view_Customer_Account(1);
+        
+        view_Customer_Account();  
         break;
     case 3:
         // ad
@@ -156,7 +157,7 @@ start:
         withdraw_FH();
         break;
     case 4:
-        deposit();
+        deposit_FH();
         break;
     case 5:
         payroll();

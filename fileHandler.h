@@ -67,39 +67,69 @@ start:
     }
 }
 
-void deposit_FH(int cid)
+void deposit_FH()
 {
-    // rifky
     int amount;
     cout << "Enter Deposit amount : ";
     cin >> amount;
+    labelrestart:
+    int cid;
+    cout << "Enter Customer id : ";
+    cin >> cid;
+    labeldeposit:
 
     string accNumber, id, name, Balance;
     string file = "customer/" + to_string(cid) + ".txt";
     ifstream myFile(file);
     if (myFile.is_open())
     {
-        while (myFile >> accNumber >> id >> name >> Balance)
-        {
+        myFile >> accNumber >> id >> name >> Balance;
+        cout<<"account balance is :"<< Balance;
+        cout<<endl;
+        int amount;
+    cout << "Enter Deposit amount : ";
+    cin >> amount;
+
             int bal = stoi(Balance);
             bal = bal + amount;
             myFile.close();
-            ofstream myFile(file);
-            myFile << accNumber << " " << id << " " << name << " " << bal;
-            myFile.close();
+            ofstream myFile2(file);
+            myFile2 << accNumber << " " << id << " " << name << " " << bal;
+            myFile2.close();
             cout << " Deposit success.." << endl;
-        }
-        myFile.close();
+            cout<<"now balance is :"<< bal;
+            cout<<endl;
+         int input;
+        endMenu:
+            cout << endl;
+            cout << "1) Another Deposit ?." << endl;
+            cout << "2) Go to Main Menu" << endl;
+            cout << "\nChoose Option : ";
+
+            cin >> input;
+            switch (input)
+            {
+            case 1:
+                goto labeldeposit;
+                break;
+            case 2:
+                //admin_Menu();
+                break;
+            default:
+                goto endMenu;
+                break;
+            }
+
     }
     else
     {
-        cout << "unable to open";
+        cout << "account not found";
+        goto labelrestart;
     }
 }
 
 void create_Customer_Account(int customer_id, int account_Number, string customer_Name, int Balance)
 {
-    // jathu get user input and fix this
 
     string file = "customer/" + to_string(customer_id) + ".txt";
     ofstream myFile(file);
@@ -115,81 +145,75 @@ void create_Customer_Account(int customer_id, int account_Number, string custome
     }
 }
 
-void create_Staff_Account(int staff_Id, string name, string staff_Address, int number)
+
+
+void view_Customer_Account()
 {
-// jd get user input and fix this
-start:
-    // inputs here
-    string file = "staff/" + to_string(staff_Id) + ".txt";
-    ofstream myFile(file);
-    if (myFile.is_open())
-    {
-        myFile << name << " " << staff_Id << " " << staff_Address << " " << number;
-        cout << "Account details saved successfully" << endl;
-        myFile.close();
-        // loop to view another customer or return to previeous menu
+  
 
-    endLoop:
-        cout << "\n1) Create another staff ?." << endl;
-        cout << "2) Back" << endl;
-        cout << "3) Logout" << endl;
-        cout << "Choose Option : ";
-        int input;
-        cin >> input;
+    start:
 
-        switch (input)
-        {
-        case 1:
-            goto start;
-            break;
-        case 2:
-            staff_Account_Menu();
-            break;
-        case 3:
-            login();
-            break;
+    int acc,accNumber;
+    string  id, name, Balance;
 
-        default:
-            goto endLoop;
-            break;
-        }
-    }
-    else
-    {
-        cout << "unable to open" << endl;
-    }
-}
+    cout << "\nEnter the Account ID : "<< endl;
+    cin >> acc;
+    cout << endl;
 
-void view_Customer_Account(int customer)
-{
-    // thasna get user input and fix this
+    string file;
+    file = "customer/" + to_string(acc) + ".txt";
 
-    string accNumber, id, name, Balance;
-    string file = "customer/" + to_string(customer) + ".txt";
+
     ifstream myFile(file);
     if (myFile.is_open())
     {
-        while (myFile >> accNumber >> id >> name >> Balance)
-        {
-            // issue3
-            cout << "Account Number : " << accNumber << endl;
-            cout << "Name : " << name << endl;
-            cout << "Id : " << id << endl;
-            cout << "Account Balance : " << Balance << endl;
-        }
+        myFile >> accNumber >> id >> name >> Balance;
+            
+                cout << "Account Number : " << accNumber << endl;
+                cout << "Name : " << name << endl;
+                cout << "Id : " << id << endl;
+                cout << "Account Balance : " << Balance << endl;
+              
         myFile.close();
+         
+    endMenu:
+         int input;
+        
+            cout << endl;
+            cout << "1) View another customer." << endl;
+            cout << "2) Back" << endl;
+            cout << "3) Go to Main Menu" << endl;
+            cout << "\nChoose Option : ";
 
-        // loop to view another customer or return to previeous menu
+            cin >> input;
+            switch (input)
+            {
+            case 1:
+                goto start;
+                break;
+            case 2:
+                customer_Account_Menu();
+                break;
+            case 3:
+                admin_Menu();
+                break;
+            default:
+                goto endMenu;
+                break;
+
+        // loop to view another customer or return to previous menu
+
+            }
     }
     else
     {
-        cout << "unable to open " << endl;
+        cout << "The Customer File isn't Found " << endl;
+        goto start;
     }
 }
 
 void view_Staff_Account(int staff_id)
 {
-    // saheel get user input and fix this
 
     string name, id, address, number;
     string file = "staff/" + to_string(staff_id) + ".txt";
@@ -198,8 +222,8 @@ void view_Staff_Account(int staff_id)
     {
         while (myFile >> name >> id >> address >> number)
         {
-            cout << "Staff Name : " << name << endl;
-            cout << "Staff Id: " << id << endl;
+            cout << "Staff Id : " << name << endl;
+            cout << "Staff Name: " << id << endl;
             cout << "Staff Address : " << address << endl;
             cout << "Staff Contact Number : " << number << endl;
         }
@@ -214,8 +238,6 @@ void view_Staff_Account(int staff_id)
 
 void view_All_Customer_Account()
 {
-    // ad, sheba customer report all customers as line by line
-    // get filenames within customer folder then read
 
     cout << "All Customer account" << endl;
     // back to previeous menu
@@ -223,7 +245,7 @@ void view_All_Customer_Account()
 
 void view_All_Staff_Account()
 {
-    // sheba customer report all customers as line by line
+
     cout << "All staff account" << endl;
     // back to previeous menu
 }
