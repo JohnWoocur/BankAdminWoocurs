@@ -61,32 +61,64 @@ start:
     }
 }
 
-void deposit_FH(int cid)
+void deposit_FH()
 {
     int amount;
     cout << "Enter Deposit amount : ";
     cin >> amount;
+    labelrestart:
+    int cid;
+    cout << "Enter Customer id : ";
+    cin >> cid;
+    labeldeposit:
 
     string accNumber, id, name, Balance;
     string file = "customer/" + to_string(cid) + ".txt";
     ifstream myFile(file);
     if (myFile.is_open())
     {
-        while (myFile >> accNumber >> id >> name >> Balance)
-        {
+        myFile >> accNumber >> id >> name >> Balance;
+        cout<<"account balance is :"<< Balance;
+        cout<<endl;
+        int amount;
+    cout << "Enter Deposit amount : ";
+    cin >> amount;
+
             int bal = stoi(Balance);
             bal = bal + amount;
             myFile.close();
-            ofstream myFile(file);
-            myFile << accNumber << " " << id << " " << name << " " << bal;
-            myFile.close();
+            ofstream myFile2(file);
+            myFile2 << accNumber << " " << id << " " << name << " " << bal;
+            myFile2.close();
             cout << " Deposit success.." << endl;
-        }
-        myFile.close();
+            cout<<"now balance is :"<< bal;
+            cout<<endl;
+         int input;
+        endMenu:
+            cout << endl;
+            cout << "1) Another Deposit ?." << endl;
+            cout << "2) Go to Main Menu" << endl;
+            cout << "\nChoose Option : ";
+
+            cin >> input;
+            switch (input)
+            {
+            case 1:
+                goto labeldeposit;
+                break;
+            case 2:
+                //admin_Menu();
+                break;
+            default:
+                goto endMenu;
+                break;
+            }
+
     }
     else
     {
-        cout << "unable to open";
+        cout << "account not found";
+        goto labelrestart;
     }
 }
 
@@ -109,29 +141,68 @@ void create_Customer_Account(int customer_id, int account_Number, string custome
 
 
 
-void view_Customer_Account(int customer)
+void view_Customer_Account()
 {
 
-    string accNumber, id, name, Balance;
-    string file = "customer/" + to_string(customer) + ".txt";
+
+    start:
+
+    int acc,accNumber;
+    string  id, name, Balance;
+
+    cout << "\nEnter the Account ID : "<< endl;
+    cin >> acc;
+    cout << endl;
+
+    string file;
+    file = "customer/" + to_string(acc) + ".txt";
+
+
     ifstream myFile(file);
     if (myFile.is_open())
     {
-        while (myFile >> accNumber >> id >> name >> Balance)
-        {
-            // issue3
-            cout << "Account Number : " << accNumber << endl;
-            cout << "Name : " << name << endl;
-            cout << "Id : " << id << endl;
-            cout << "Account Balance : " << Balance << endl;
-        }
+        myFile >> accNumber >> id >> name >> Balance;
+            
+                cout << "Account Number : " << accNumber << endl;
+                cout << "Name : " << name << endl;
+                cout << "Id : " << id << endl;
+                cout << "Account Balance : " << Balance << endl;
+              
         myFile.close();
+         
+    endMenu:
+         int input;
+        
+            cout << endl;
+            cout << "1) View another customer." << endl;
+            cout << "2) Back" << endl;
+            cout << "3) Go to Main Menu" << endl;
+            cout << "\nChoose Option : ";
 
-        // loop to view another customer or return to previeous menu
+            cin >> input;
+            switch (input)
+            {
+            case 1:
+                goto start;
+                break;
+            case 2:
+                customer_Account_Menu();
+                break;
+            case 3:
+                admin_Menu();
+                break;
+            default:
+                goto endMenu;
+                break;
+
+        // loop to view another customer or return to previous menu
+
+            }
     }
     else
     {
-        cout << "unable to open " << endl;
+        cout << "The Customer File isn't Found " << endl;
+        goto start;
     }
 }
 
