@@ -4,7 +4,7 @@ using namespace std;
 void create_Staff_Account(int staff_Id, string name, string staff_Address, int phone_number)
 {
 
-start:
+    start:
             cout << "Enter Staff ID: ";
             cin >> staff_Id;
 
@@ -27,9 +27,9 @@ start:
         // loop to view another customer or return to previeous menu
 
         endLoop:
-        cout << "\n1) Create another staff ?." << endl;
-        cout << "2) Back" << endl;
-        cout << "3) Logout" << endl;
+        cout << "\n1.  Create another staff ?." << endl;
+        cout << "2.  Back" << endl;
+        cout << "3.  Logout" << endl;
         cout << "Choose Option : ";
         int input;
         cin >> input;
