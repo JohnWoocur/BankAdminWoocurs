@@ -26,7 +26,7 @@ customer:
     {
     case 1:
         // jathu
-        create_Customer_Account(1, 50000, "test", 10000);
+        create_Customer_Account();
         break;
     case 2:
         // thasna
@@ -71,7 +71,7 @@ staff:
     {
     case 1:
         // jd
-        create_Staff_Account(2, "linthu", "uk", 245451);
+        create_Staff_Account();
         break;
     case 2:
         // thasna
