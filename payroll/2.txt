@@ -1,0 +1,2 @@
+Staff id | Your allowances | Hours Worked | Hourly Rate | Regular Pay | OverTime Pay | Over ALL Pay | Gross Salary | Your Net Salary
+2 900 208 250 52000 10500 62500 63400 62400

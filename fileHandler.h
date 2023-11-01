@@ -7,29 +7,31 @@ void withdraw_FH()
 {
     // linthu
 restart:
-    int cid;
+    int cid, mobile,Balance;
     cout << "Enter Customer id : ";
     cin >> cid;
 
-    string accNumber, id, name, Balance;
+    string email, id, name;
     string file = "customer/" + to_string(cid) + ".txt";
 start:
     ifstream readFile(file);
     if (readFile.is_open())
     {
-        readFile >> accNumber >> id >> name >> Balance;
+        readFile >> name >> id >> email >> mobile >> Balance;
+        // myFile >> name >> id >> email >> mobile >> Balance;
+
         readFile.close();
         int amount;
-        cout << "\nAccount Balance of " + name + " is : " + Balance + " Rs" << endl;
+        cout << "\nAccount Balance of " + name + " is : " << Balance << " Rs" << endl;
         cout << "Enter Withdrawal amount : ";
         cin >> amount;
 
-        int bal = stoi(Balance);
+        int bal = Balance;
         if (bal >= amount)
         {
             bal = bal - amount;
             ofstream writeFile(file);
-            writeFile << accNumber << " " << id << " " << name << " " << bal;
+            writeFile << name << " " << id << " " << email << " " << mobile << " " << bal;
             writeFile.close();
             cout << "\nWithdrawal success..." << endl;
             cout << endl;
@@ -77,12 +79,13 @@ labelrestart:
     cin >> cid;
 labeldeposit:
 
-    string accNumber, id, name, Balance;
+    string email, id, name, Balance;
+    int mobile;
     string file = "customer/" + to_string(cid) + ".txt";
     ifstream myFile(file);
     if (myFile.is_open())
     {
-        myFile >> accNumber >> id >> name >> Balance;
+        myFile >> name >> id >> email >> mobile >> Balance;
         cout << "account balance is :" << Balance;
         cout << endl;
         int amount;
@@ -93,7 +96,9 @@ labeldeposit:
         bal = bal + amount;
         myFile.close();
         ofstream myFile2(file);
-        myFile2 << accNumber << " " << id << " " << name << " " << bal;
+        // myFile2 << accNumber << " " << id << " " << name << " " << bal;
+        myFile2 << name << " " << id << " " << email << " " << mobile << " " << bal;
+
         myFile2.close();
         cout << " Deposit success.." << endl;
         cout << endl;
@@ -129,11 +134,12 @@ labeldeposit:
 
 void create_Customer_Account()
 {
-    start:
+start:
     int account_no;
     string name;
     string Address;
     int phone_number;
+    int initialAmount = 1500;
 
     cout << "Enter account_No : ";
     cin >> account_no;
@@ -149,15 +155,14 @@ void create_Customer_Account()
 
     string file = "customer/" + to_string(account_no) + ".txt";
     ofstream myFile(file);
-    ofstream customers("customers.txt",ios::app);
+    ofstream customers("customers.txt", ios::app);
     if (myFile.is_open())
     {
-        myFile << name << " " << account_no << " " << Address << " " << phone_number;
+        myFile << name << " " << account_no << " " << Address << " " << phone_number << " " << initialAmount;
         customers << account_no << endl;
         cout << "Account details saved successfully" << endl;
         myFile.close();
         customers.close();
-        // loop to view another customer or return to previeous menu
 
     endLoop:
         cout << "\n1.  Create another Account ?." << endl;
@@ -259,8 +264,8 @@ void view_Customer_Account()
 
 start:
 
-    int acc, accNumber;
-    string id, name, Balance;
+    int acc, mobile, Balance;
+    string id, name, email;
 
     cout << "\nEnter the Account ID : " << endl;
     cin >> acc;
@@ -272,12 +277,12 @@ start:
     ifstream myFile(file);
     if (myFile.is_open())
     {
-        myFile >> accNumber >> id >> name >> Balance;
+        myFile >> name >> id >> email >> mobile >> Balance;
 
-        cout << "Account Number : " << accNumber << endl;
-        cout << "Name : " << name << endl;
-        cout << "Id : " << id << endl;
-        cout << "Account Balance : " << Balance << endl;
+        cout << "Account Holder Name \t: " << name << endl;
+        cout << "Account Email ID \t: " << email << endl;
+        cout << "Account Mobile Number \t: " << mobile << endl;
+        cout << "Account Balance \t: " << Balance << endl;
 
         myFile.close();
 
@@ -378,26 +383,27 @@ void view_All_Customer_Account()
 {
     cout << endl;
 start:
-    int cid;
+    int cid, mobile, balance;
     int count = 0;
     int activeAccount = 0;
 
-    string name, id, acc, balance;
+    string name, email, acc;
     ifstream customersFile("customers.txt");
-    cout << "Account No\tID\tName\t\tBalance" << endl;
-    cout << "________________________________________________" << endl;
+    cout << "ID\tEmail ID\tMobile No\tBalance\t\tName" << endl;
+    cout << "______________________________________________________________________________" << endl;
     while (customersFile >> cid)
     {
         string file = "customer/" + to_string(cid) + ".txt";
         ifstream singleCustomer(file);
         if (singleCustomer.is_open())
         {
-            singleCustomer >> acc >> id >> name >> balance;
+            singleCustomer >> name >> cid >> email >> mobile >> balance;
             {
-                cout << acc << "\t\t" << id << "\t" << name << "\t\t" << balance << endl;
+                cout << cid << "\t" << email << "\t" << mobile << "\t\t" << balance << "\t\t" << name << endl;
             }
             singleCustomer.close();
-            if(stoi(balance) >= 500){
+            if (balance >= 500)
+            {
                 ++activeAccount;
             }
             ++count;
@@ -438,39 +444,39 @@ endMenu:
 void view_All_Staff_Account()
 {
 
-    fstream staffsFile,readStaffs;
+    fstream staffsFile, readStaffs;
     string txtOut;
-    string staff_id, name , address , contact_no;
+    string name, address;
+    int staff_id, contact_no;
 
     staffsFile.open("staffs.txt");
     cout << " staff_id         name         address         contact_no " << endl;
-    while(getline(staffsFile,txtOut))
+    while (getline(staffsFile, txtOut))
     {
-        readStaffs.open("staff/" + txtOut+".txt");
-        readStaffs >> staff_id >> name >> address >> contact_no ;
-        cout << staff_id + "     " + name + "        " + address + "         " + contact_no  << endl;
+        readStaffs.open("staff/" + txtOut + ".txt");
+        readStaffs >> name >> staff_id >> address >> contact_no;
+        cout << staff_id << "     " << name << "        " << address << "         " << contact_no << endl;
         readStaffs.close();
     }
     staffsFile.close();
-        cout << endl;
-        cout << endl;
-        cout << "1) Back to Staff Menu" << endl;
-        cout << "2) Logout" << endl;
-        cout << "Choose Option : ";
-        int input;
-        cin >> input;
+    cout << endl;
+    cout << endl;
+    cout << "1) Back to Staff Menu" << endl;
+    cout << "2) Logout" << endl;
+    cout << "Choose Option : ";
+    int input;
+    cin >> input;
 
-        switch (input)
-        {
-        case 1:
-            staff_Account_Menu();
-            break;
-        case 2:
-            login();
-            break;
-
-        default:
-            exit(0);
-            break;
-        }
+    switch (input)
+    {
+    case 1:
+        staff_Account_Menu();
+        break;
+    case 2:
+        login();
+        break;
+    default:
+        exit(0);
+        break;
+    }
 }
