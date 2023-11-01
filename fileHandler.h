@@ -170,7 +170,7 @@ start:
 
     string file = "staff/" + to_string(staff_Id) + ".txt";
     ofstream myFile(file);
-    ofstream staffs("staffs.txt",ios::app);
+    ofstream staffs("staffs.txt", ios::app);
     if (myFile.is_open())
     {
         myFile << name << " " << staff_Id << " " << staff_Address << " " << phone_number;
@@ -333,9 +333,63 @@ start:
 
 void view_All_Customer_Account()
 {
+    cout << endl;
+start:
+    int cid;
+    int count = 0;
+    int activeAccount = 0;
 
-    cout << "All Customer account" << endl;
-    // back to previeous menu
+    string name, id, acc, balance;
+    ifstream customersFile("customers.txt");
+    cout << "Account No\tID\tName\t\tBalance" << endl;
+    cout << "________________________________________________" << endl;
+    while (customersFile >> cid)
+    {
+        string file = "customer/" + to_string(cid) + ".txt";
+        ifstream singleCustomer(file);
+        if (singleCustomer.is_open())
+        {
+            singleCustomer >> acc >> id >> name >> balance;
+            {
+                cout << acc << "\t\t" << id << "\t" << name << "\t\t" << balance << endl;
+            }
+            singleCustomer.close();
+            if(stoi(balance) >= 500){
+                ++activeAccount;
+            }
+            ++count;
+        }
+        else
+        {
+            cout << "Customer ID : " + to_string(cid) + "Not Found" << endl;
+            goto start;
+        }
+    }
+
+    cout << "\nTotal customers count is \t\t: " << count << endl;
+    cout << "Total active customers count is \t: " << activeAccount << endl;
+
+endMenu:
+    int opt;
+
+    cout << endl;
+    cout << "1) Back" << endl;
+    cout << "2) Go to Main Menu" << endl;
+    cout << "\nChoose Option : ";
+    cin >> opt;
+
+    switch (opt)
+    {
+    case 1:
+        staff_Account_Menu();
+        break;
+    case 2:
+        admin_Menu();
+        break;
+    default:
+        goto endMenu;
+        break;
+    }
 }
 
 void view_All_Staff_Account()
