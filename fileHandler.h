@@ -26,18 +26,18 @@ start:
         if (bal >= amount)
         {
             bal = bal - amount;
-            // readFile.close();
             ofstream writeFile(file);
             writeFile << accNumber << " " << id << " " << name << " " << bal;
             writeFile.close();
             cout << "\nWithdrawal success..." << endl;
+            cout<<endl;
             cout << "Balance Amount is : " << bal << " Rs" << endl;
 
             int input;
         endMenu:
             cout << endl;
-            cout << "1) Another Withdraw ?." << endl;
-            cout << "2) Go to Main Menu" << endl;
+            cout << "1.  Another Withdraw ?." << endl;
+            cout << "2.  Go to Main Menu" << endl;
             cout << "\nChoose Option : ";
 
             cin >> input;
@@ -69,9 +69,6 @@ start:
 
 void deposit_FH()
 {
-    int amount;
-    cout << "Enter Deposit amount : ";
-    cin >> amount;
     labelrestart:
     int cid;
     cout << "Enter Customer id : ";
@@ -87,8 +84,8 @@ void deposit_FH()
         cout<<"account balance is :"<< Balance;
         cout<<endl;
         int amount;
-    cout << "Enter Deposit amount : ";
-    cin >> amount;
+        cout << "Enter Deposit amount : ";
+        cin >> amount;
 
             int bal = stoi(Balance);
             bal = bal + amount;
@@ -97,13 +94,14 @@ void deposit_FH()
             myFile2 << accNumber << " " << id << " " << name << " " << bal;
             myFile2.close();
             cout << " Deposit success.." << endl;
+            cout<<endl;
             cout<<"now balance is :"<< bal;
             cout<<endl;
          int input;
         endMenu:
             cout << endl;
-            cout << "1) Another Deposit ?." << endl;
-            cout << "2) Go to Main Menu" << endl;
+            cout << "1.  Another Deposit ?." << endl;
+            cout << "2.  Go to Main Menu" << endl;
             cout << "\nChoose Option : ";
 
             cin >> input;
@@ -113,7 +111,7 @@ void deposit_FH()
                 goto labeldeposit;
                 break;
             case 2:
-                //admin_Menu();
+                admin_Menu();
                 break;
             default:
                 goto endMenu;
@@ -149,7 +147,7 @@ void create_Customer_Account(int customer_id, int account_Number, string custome
 
 void view_Customer_Account()
 {
-  
+
 
     start:
 
@@ -168,17 +166,17 @@ void view_Customer_Account()
     if (myFile.is_open())
     {
         myFile >> accNumber >> id >> name >> Balance;
-            
+
                 cout << "Account Number : " << accNumber << endl;
                 cout << "Name : " << name << endl;
                 cout << "Id : " << id << endl;
                 cout << "Account Balance : " << Balance << endl;
-              
+
         myFile.close();
-         
+
     endMenu:
          int input;
-        
+
             cout << endl;
             cout << "1) View another customer." << endl;
             cout << "2) Back" << endl;

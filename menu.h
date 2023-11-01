@@ -30,8 +30,7 @@ customer:
         break;
     case 2:
         // thasna
-        
-        view_Customer_Account();  
+        view_Customer_Account();
         break;
     case 3:
         // ad
@@ -92,37 +91,6 @@ staff:
         break;
     };
 }
-
-// void customer_Menu()
-// {
-//     int customer_id;
-//     int customer_Selection;
-//     cout << "******* | Wellcome |*******" << endl;
-//     cout << "Enter your Id : ";
-//     cin >> customer_id;
-//     if (6 == 6)
-//     {
-//         cout << "\t1. Account Details" << endl;
-//         cout << "\t2. Deposit" << endl;
-//         cout << "\t3. Withdraw" << endl;
-//         cout << "\t4. Return" << endl;
-//         cout << endl;
-//         cout << "Please Select One ...... : ";
-//         cin >> customer_Selection;
-//     }
-// }
-
-// void account_Menu()
-// {
-//     int role;
-//     cout << "******* | Select your Role |*******" << endl;
-//     cout << "\t1. Admin" << endl;
-//     cout << "\t2. Customer" << endl;
-//     cout << endl;
-//     cout << "Please Select One ...... : ";
-//     cin >> role;
-//     account_Menu_Switch(role);
-// }
 
 void admin_Menu()
 {
