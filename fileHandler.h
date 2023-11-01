@@ -129,17 +129,60 @@ labeldeposit:
 
 void create_Customer_Account()
 {
-    int customer_id;
-    int account_Number;
-    string customer_Name;
-    int Balance;
-    string file = "customer/" + to_string(customer_id) + ".txt";
+    start:
+    int account_no;
+    string name;
+    string Address;
+    int phone_number;
+
+    cout << "Enter account_No : ";
+    cin >> account_no;
+
+    cout << "Enter Name: ";
+    cin >> name;
+
+    cout << "Enter Address: ";
+    cin >> Address;
+
+    cout << "Enter Phone Number: ";
+    cin >> phone_number;
+
+    string file = "customer/" + to_string(account_no) + ".txt";
     ofstream myFile(file);
+    ofstream customers("customers.txt",ios::app);
     if (myFile.is_open())
     {
-        myFile << account_Number << " " << customer_id << " " << customer_Name << " " << Balance;
+        myFile << name << " " << account_no << " " << Address << " " << phone_number;
+        customers << account_no << endl;
         cout << "Account details saved successfully" << endl;
         myFile.close();
+        customers.close();
+        // loop to view another customer or return to previeous menu
+
+    endLoop:
+        cout << "\n1.  Create another Account ?." << endl;
+        cout << "2.  Back" << endl;
+        cout << "3.  Logout" << endl;
+        cout << "Choose Option : ";
+        int input;
+        cin >> input;
+
+        switch (input)
+        {
+        case 1:
+            goto start;
+            break;
+        case 2:
+            customer_Account_Menu();
+            break;
+        case 3:
+            login();
+            break;
+
+        default:
+            goto endLoop;
+            break;
+        }
     }
     else
     {
@@ -395,6 +438,39 @@ endMenu:
 void view_All_Staff_Account()
 {
 
-    cout << "All staff account" << endl;
-    // back to previeous menu
+    fstream staffsFile,readStaffs;
+    string txtOut;
+    string staff_id, name , address , contact_no;
+
+    staffsFile.open("staffs.txt");
+    cout << " staff_id         name         address         contact_no " << endl;
+    while(getline(staffsFile,txtOut))
+    {
+        readStaffs.open("staff/" + txtOut+".txt");
+        readStaffs >> staff_id >> name >> address >> contact_no ;
+        cout << staff_id + "     " + name + "        " + address + "         " + contact_no  << endl;
+        readStaffs.close();
+    }
+    staffsFile.close();
+        cout << endl;
+        cout << endl;
+        cout << "1) Back to Staff Menu" << endl;
+        cout << "2) Logout" << endl;
+        cout << "Choose Option : ";
+        int input;
+        cin >> input;
+
+        switch (input)
+        {
+        case 1:
+            staff_Account_Menu();
+            break;
+        case 2:
+            login();
+            break;
+
+        default:
+            exit(0);
+            break;
+        }
 }
