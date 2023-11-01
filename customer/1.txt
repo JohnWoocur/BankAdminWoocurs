@@ -1,1 +1,1 @@
-linthujan 1 li@dg.com 2147483647 100000
+linthujan 1 li@dg.com 2147483647 98997

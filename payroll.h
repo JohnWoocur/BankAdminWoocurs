@@ -2,7 +2,7 @@
 #include <fstream>
 
 using namespace std;
-
+void login();
 void payroll()
 {
 
@@ -124,10 +124,10 @@ endPayroll:
       goto payroll;
       break;
    case 2:
-      // admin_Menu();
+      admin_Menu();
       break;
    case 3:
-      // login();
+      login();
       break;
 
    default:
