@@ -210,15 +210,21 @@ void view_Customer_Account()
     }
 }
 
-void view_Staff_Account(int staff_id)
+void view_Staff_Account()
 {
+    start:
 
+    int sid;
     string name, id, address, number;
-    string file = "staff/" + to_string(staff_id) + ".txt";
+
+    cout << "\nEnter the Staff ID : "<< endl;
+    cin >> sid;
+
+    string file = "staff/" + to_string(sid) + ".txt";
     ifstream myFile(file);
     if (myFile.is_open())
     {
-        while (myFile >> name >> id >> address >> number)
+        myFile >> name >> id >> address >> number;
         {
             cout << "Staff Id : " << name << endl;
             cout << "Staff Name: " << id << endl;
@@ -226,11 +232,39 @@ void view_Staff_Account(int staff_id)
             cout << "Staff Contact Number : " << number << endl;
         }
         myFile.close();
+
+    endMenu:
+         int opt;
+
+            cout << endl;
+            cout << "1) View another Staff." << endl;
+            cout << "2) Back" << endl;
+            cout << "3) Go to Main Menu" << endl;
+            cout << "\nChoose Option : ";
+            cin >> opt;
+
+            switch (opt)
+            {
+            case 1:
+                goto start;
+                break;
+            case 2:
+                staff_Account_Menu();
+                break;
+            case 3:
+                admin_Menu();
+                break;
+            default:
+                goto endMenu;
+                break;
+
         // loop to view another staff or return to previeous menu
+            }
     }
     else
     {
-        cout << "unable to open " << endl;
+        cout << "The Staff File isn't Found" << endl;
+        goto start;
     }
 }
 
