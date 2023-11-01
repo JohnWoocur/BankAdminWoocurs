@@ -14,7 +14,7 @@ void deposit_FH();
 void create_Customer_Account(int, int, string, int);
 void create_Staff_Account(int, string, string, int);
 void view_Customer_Account();
-void view_Staff_Account(int);
+void view_Staff_Account();
 void view_All_Customer_Account();
 void view_All_Staff_Account();
 

@@ -75,7 +75,7 @@ staff:
         break;
     case 2:
         // thasna
-        view_Staff_Account(2);
+        view_Staff_Account();
         break;
     case 3:
         // ad, sheba
